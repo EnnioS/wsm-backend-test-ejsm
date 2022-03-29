@@ -1,3 +1,3 @@
 # wsm-backend-test-ejsm
- ## whte Shark ##
+ ## White Shark Test##
  Mongo DataBase backup is inside database folder
