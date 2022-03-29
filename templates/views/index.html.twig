@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}} - Report Controller
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <p><h1>Hello ReportsController! <picture><img src="img/check_img.png"></picture></h1></p>
+    <p/>Please enter the Account ID you´d like to display</p>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12" id="getDataForm">
+
+            <form method="post"  id="form1" name="form1">
+                <p><div class="form-group">
+                    <input type="text" class="form-control" id="accountID" name = "accountID" placeholder="Account ID">
+                </div></p>
+                <button type="button" class="btn btn-primary dataBtn" id="getData" name="getData" onclick="document.form1.action = '/search'; document.form1.submit()" >GET DATA</button>
+                <button type="button" class="btn btn-primary dataBtn" id="getData" name="getData" onclick="document.form1.action = '/';document.form1.submit()" >SHOW ALL</button>
+            </form>
+             
+        </div>
+    </div><br>
+    Aggregated performance for All <b>ACTIVE</b> accounts is listed below:
+    <hr>
+   <div class="box box-solid box-primary">
+        {% if metrics is not defined %}
+            <div class="box-body">
+                <span>There are no documents.</span>
+            </div>
+        {% else %}
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th><span>Account Name</span></th>
+                            <th><span>Account ID</span></th>
+                            <th><span>Spend</span></th>
+                            <th><span>Clicks</span></th>
+                            <th><span>Impressions</span></th>
+                            <th><span>Cost per Click</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for metric in metrics %}
+                            <tr>
+                                <th>
+                                    I couldnt reference oneToMany
+                                </th>
+                                <th>
+                                    {{ metric.accountId}}
+                                </th>
+                                <th>
+                                    {% if metric.spend is defined %}
+                                        {{metric.spend}}
+                                    {%  else %}
+                                        0
+                                    {% endif %}
+                                </th>
+                                <th>
+                                    {% if metric.clicks is defined %}
+                                        {{metric.clicks}}
+                                    {%  else %}
+                                        0
+                                    {% endif %}
+                                </th>
+                                <th>
+                                    {% if metric.impressions is defined %}
+                                        {{metric.impressions}}
+                                    {%  else %}
+                                        0
+                                    {% endif %}
+                                </th>
+                                <th>
+                                    {% if metric.costPerClick is defined %}
+                                        {{metric.costPerClick}}
+                                    {%  else %}
+                                        0
+                                    {% endif %}
+                                </th>
+                            </tr>
+                        {%  endfor %}
+                    <tbody>
+        {% endif %}
+
+    {% if account_id is defined %}
+        <h2>{{account_id}}</h2>
+    {% endif %}
+</div>
+{% endblock %}
